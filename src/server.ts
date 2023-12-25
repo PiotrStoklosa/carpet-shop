@@ -1,6 +1,7 @@
 import express, {Request, Response} from 'express';
 import {getAllCarpets, getCarpetById, getCarpetsByMaterial} from "./service/carpetService";
 import {createOrder} from "./service/orderService";
+import {getCategories} from "./service/categoryService";
 
 const app = express();
 const port = 3001;
@@ -18,6 +19,10 @@ app.get('/carpet/:material', (req: Request, res: Response) => {
 
 app.get('/carpet', (_req: Request, res: Response) => {
     res.send(getAllCarpets());
+});
+
+app.get('/category', (_req: Request, res: Response) => {
+    res.send(getCategories());
 });
 
 interface ProductRequest extends Request {
