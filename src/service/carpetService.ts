@@ -5,7 +5,8 @@ interface Carpet {
     shape: String,
     color: String,
     material: String,
-    image: String
+    image: String,
+    description: String
 }
 
 
@@ -14,7 +15,8 @@ const CarpetSchema = new Schema({
     shape: String,
     color: String,
     material: String,
-    image: String
+    image: String,
+    description: String
 });
 
 const Carpet = mongoose.model<Carpet>('Carpet', CarpetSchema);
