@@ -33,6 +33,6 @@ export async function createOrder(itemIds: string[]): Promise<string> {
 
     } catch (error) {
         console.error(error);
-        throw error;
+        return ""
     }
 }

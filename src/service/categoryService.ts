@@ -16,6 +16,6 @@ export async function getCategories(): Promise<Category[]> {
         return await Category.find({});
     } catch (error) {
         console.error(error);
-        throw error;
+        return []
     }
 }

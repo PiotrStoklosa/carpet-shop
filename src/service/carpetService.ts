@@ -23,10 +23,10 @@ const Carpet = mongoose.model<Carpet>('Carpet', CarpetSchema);
 
 export async function getAllCarpets(): Promise<Carpet[]> {
     try {
-        return await Carpet.find({});
+        return await Carpet.find({}).exec();
     } catch (error) {
         console.error(error);
-        throw error;
+        return []
     }
 }
 
@@ -35,7 +35,7 @@ export async function getCarpetsByMaterial(material: string): Promise<Carpet[]> 
         return await Carpet.find({material: material});
     } catch (error) {
         console.error(error);
-        throw error;
+        return []
     }
 }
 
@@ -44,6 +44,6 @@ export async function getCarpetById(carpetId: string): Promise<Carpet | null> {
         return await Carpet.findById(carpetId);
     } catch (error) {
         console.error(error);
-        throw error;
+        return null
     }
 }
