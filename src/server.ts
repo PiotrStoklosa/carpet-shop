@@ -7,22 +7,22 @@ const app = express();
 const port = 3001;
 require('./database/db')
 
-app.get('/carpet/:id', (req: Request, res: Response) => {
+app.get('/carpet/:id', async (req: Request, res: Response) => {
     const carpetId = req.params.id;
-    res.send(getCarpetById(carpetId));
+    res.send(await getCarpetById(carpetId));
 });
 
-app.get('/carpet/:material', (req: Request, res: Response) => {
+app.get('/carpet/:material', async (req: Request, res: Response) => {
     const carpetMaterial = req.params.material;
-    res.send(getCarpetsByMaterial(carpetMaterial));
+    res.send(await getCarpetsByMaterial(carpetMaterial));
 });
 
-app.get('/carpet', (_req: Request, res: Response) => {
-    res.send(getAllCarpets());
+app.get('/carpet', async (_req: Request, res: Response) => {
+    res.send(await getAllCarpets());
 });
 
-app.get('/category', (_req: Request, res: Response) => {
-    res.send(getCategories());
+app.get('/category', async (_req: Request, res: Response) => {
+    res.send(await getCategories());
 });
 
 interface ProductRequest extends Request {
@@ -31,10 +31,10 @@ interface ProductRequest extends Request {
     };
 }
 
-app.post('/order', (req: ProductRequest, res: Response) => {
+app.post('/order', async (req: ProductRequest, res: Response) => {
 
     const productList: string[] = req.body.products;
-    res.send(createOrder(productList));
+    res.send(await createOrder(productList));
 });
 
 app.listen(port, () => {
