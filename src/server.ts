@@ -2,11 +2,17 @@ import express, {Request, Response} from 'express';
 import {getAllCarpets, getCarpetById, getCarpetsByMaterial} from "./service/carpetService";
 import {createOrder} from "./service/orderService";
 import {getCategories} from "./service/categoryService";
+import cors from 'cors';
 
 const app = express();
 const port = 3001;
 require('./database/db')
 
+app.use(cors({
+    origin: 'http://localhost:3000',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+}));
 app.get('/carpet/:id', async (req: Request, res: Response) => {
     const carpetId = req.params.id;
     res.send(await getCarpetById(carpetId));

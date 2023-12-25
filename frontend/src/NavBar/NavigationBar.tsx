@@ -24,7 +24,7 @@ export default function MenuAppBar() {
                 <Toolbar>
                     <Typography variant="h6" component="div">
                         <Link href="/" underline="none">
-                            <Avatar sx={{width: 70, height: 70}} alt="Logo" src={logo}/>
+                            <Avatar sx={{width: 60, height: 60}} alt="Logo" src={logo}/>
                         </Link>
                     </Typography>
                     <Box sx={{flexGrow: 2}}/>
