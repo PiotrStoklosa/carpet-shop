@@ -14,11 +14,11 @@ app.use(cors({
     credentials: true,
 }));
 app.get('/carpet/:id', async (req: Request, res: Response) => {
-    const carpetId = req.params.id;
+    const carpetId = parseInt(req.params.id)
     res.send(await getCarpetById(carpetId));
 });
 
-app.get('/carpet/:material', async (req: Request, res: Response) => {
+app.get('/carpet/material/:material', async (req: Request, res: Response) => {
     const carpetMaterial = req.params.material;
     res.send(await getCarpetsByMaterial(carpetMaterial));
 });

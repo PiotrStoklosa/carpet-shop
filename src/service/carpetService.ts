@@ -1,7 +1,7 @@
 import mongoose, {Schema} from 'mongoose';
 
 interface Carpet {
-    _id: String,
+    _id: Number,
     shape: String,
     color: String,
     material: String,
@@ -11,7 +11,7 @@ interface Carpet {
 
 
 const CarpetSchema = new Schema({
-    _id: String,
+    _id: Number,
     shape: String,
     color: String,
     material: String,
@@ -39,9 +39,9 @@ export async function getCarpetsByMaterial(material: string): Promise<Carpet[]> 
     }
 }
 
-export async function getCarpetById(carpetId: string): Promise<Carpet | null> {
+export async function getCarpetById(carpetId: number): Promise<Carpet | null> {
     try {
-        return await Carpet.findById(carpetId);
+        return await Carpet.findOne({ _id: carpetId });
     } catch (error) {
         console.error(error);
         return null
