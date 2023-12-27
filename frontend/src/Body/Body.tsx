@@ -2,15 +2,15 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import {Card, CardContent, CardMedia, Grid} from "@mui/material";
 import Typography from "@mui/material/Typography";
-import {Link} from '@mui/material';
+import {NavLink} from "react-router-dom";
 
 export interface Carpet {
-    _id: String,
-    shape: String,
-    color: String,
-    material: String,
-    image: String,
-    description: String
+    _id: string,
+    shape: string,
+    color: string,
+    material: string,
+    image: string,
+    description: string
 }
 
 
@@ -34,13 +34,7 @@ const Body: React.FC = () => {
         <Grid container spacing={3}>
             {data.map((card) => (
                 <Grid item key={card._id as React.Key} xs={12} sm={4} md={3}>
-                    <Link
-                        href={
-                            '/item/' +
-                            card._id
-                        }
-                        underline="none"
-                    >
+                    <NavLink to={'/item/' + card._id} style={{textDecoration: 'none'}}>
                         <Card className="card">
                             <CardMedia
                                 component="img"
@@ -58,7 +52,7 @@ const Body: React.FC = () => {
                                 </Typography>
                             </CardContent>
                         </Card>
-                    </Link>
+                    </NavLink>
                 </Grid>
             ))}
         </Grid>

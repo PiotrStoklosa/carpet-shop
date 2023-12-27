@@ -5,11 +5,12 @@ import Footer from "./FooterBar/Footer";
 import MenuAppBar from "./NavBar/NavigationBar";
 import Body from "./Body/Body";
 import CarpetItemView from "./Body/CarpetItemView";
+import {CartContextProvider} from "./Body/Cart";
 
 
 function App() {
     return (
-        <>
+        <CartContextProvider>
             <header  >
                 <MenuAppBar/>
             </header>
@@ -33,7 +34,7 @@ function App() {
             <footer style={{background: '#684C38', bottom: '0', fontSize: '12px'}}>
                 <Footer/>
             </footer>
-        </>
+        </CartContextProvider>
     );
 }
 

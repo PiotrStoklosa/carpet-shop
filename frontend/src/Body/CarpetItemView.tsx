@@ -4,7 +4,10 @@ import {Card, CardContent, CardMedia} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
 import {Carpet} from "./Body";
-import { useParams } from 'react-router-dom';
+import {useParams} from 'react-router-dom';
+import IconButton from "@mui/material/IconButton";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import BackArrow from "./BackArrow";
 
 const defaultCarpet: Carpet = {
     _id: "",
@@ -18,9 +21,9 @@ const defaultCarpet: Carpet = {
 const CarpetItemView: React.FC = () => {
 
 
-    const { itemID } = useParams();
+    const {itemID} = useParams();
     const item: string = itemID!;
-    const { amount, carpets, addToCarpets, removeFromCarpets } = useContext(CartContext);
+    const {amount, carpets, addToCarpets, removeFromCarpets} = useContext(CartContext);
     const [carpet, setCarpet] = useState<Carpet>(defaultCarpet);
 
     useEffect(() => {
@@ -35,26 +38,40 @@ const CarpetItemView: React.FC = () => {
 
         fetchData();
     }, []);
-    console.log(carpet)
-    return (
 
-        <Card className="card">
-            <CardMedia
-                component="img"
-                height="250"
-                width="120"
-                image={`${process.env.PUBLIC_URL}/pictures/${carpet.image}`}
-                style={{ objectFit: 'contain' }}
-            />
-            <CardContent>
-                <Typography variant="h5" component="div">
-                    {carpet.material}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                    {carpet.shape}
-                </Typography>
-            </CardContent>
-        </Card>
+    return (
+        <div>
+            <BackArrow/>
+
+            <Card className="card">
+                <CardMedia
+                    component="img"
+                    height="250"
+                    width="120"
+                    image={`${process.env.PUBLIC_URL}/pictures/${carpet.image}`}
+                    style={{objectFit: 'contain'}}
+                />
+                <CardContent>
+                    <Typography variant="h5" component="div">
+                        {carpet.material}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                        {carpet.shape}
+                    </Typography>
+                    <Typography style={{textAlign: 'right'}}>
+                        <IconButton
+                            size="large"
+                            color="inherit"
+                            onClick={() => {
+                                addToCarpets(carpet._id);
+                            }}
+                        ><ShoppingCartIcon/>
+                        </IconButton>
+                    </Typography>
+
+                </CardContent>
+            </Card>
+        </div>
     );
 };
 
