@@ -6,11 +6,13 @@ import MenuAppBar from "./NavBar/NavigationBar";
 import Body from "./Body/Body";
 import CarpetItemView from "./Body/CarpetItemView";
 import {CartContextProvider} from "./Body/Cart";
+import CartDisplay from "./Body/CartDisplay";
 
 
 function App() {
     return (
         <CartContextProvider>
+            <Router>
             <header  >
                 <MenuAppBar/>
             </header>
@@ -18,19 +20,22 @@ function App() {
                 <div
                     style={{color: '#FFFFFF', minHeight: '85vh', maxWidth: '50%', margin: '0 auto', padding: '30px'}}
                 >
-                <Router>
+
                     <Routes>
                         <Route path="/" element={<Body/>}/>
                         <Route
                             path="/item/:itemID"
                             element={<CarpetItemView/>}
                         />
-
+                        <Route
+                            path="/cart"
+                            element={<CartDisplay/>}
+                        />
                     </Routes>
-                </Router>
+
                 </div>
             </div>
-
+            </Router>
             <footer style={{background: '#684C38', bottom: '0', fontSize: '12px'}}>
                 <Footer/>
             </footer>
