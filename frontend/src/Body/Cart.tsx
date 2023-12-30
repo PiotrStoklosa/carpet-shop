@@ -6,7 +6,7 @@ export type CartCarpet = {
     quantity: number;
 };
 
-type CartContext = {
+type CartContextType = {
     amount: number;
     carpets: CartCarpet[];
     addToCarpets: (carpet: Carpet) => void;
@@ -19,7 +19,7 @@ type CartAction =
     | { type: "REMOVE_FROM_CARPETS"; payload: string }
     | { type: "RESET_CART"; };
 
-const defaultValue: CartContext = {
+const defaultValue: CartContextType = {
     amount: 0,
     carpets: [],
     addToCarpets: () => {
@@ -30,9 +30,9 @@ const defaultValue: CartContext = {
     },
 };
 
-export const CartContext = createContext<CartContext>(defaultValue);
+export const CartContext = createContext<CartContextType>(defaultValue);
 
-const cartReducer = (state: CartContext, action: CartAction): CartContext => {
+const cartReducer = (state: CartContextType, action: CartAction): CartContextType => {
     switch (action.type) {
         case "ADD_TO_CARPETS":
             const existingCarpet = state.carpets.find((carpet) => carpet.carpet._id === action.payload._id);
@@ -60,8 +60,7 @@ const cartReducer = (state: CartContext, action: CartAction): CartContext => {
                     const updatedCarpets = state.carpets.filter((carpet) => carpet.carpet._id !== action.payload);
 
                     return {...state, amount: updatedAmount, carpets: updatedCarpets};
-                }
-                else{
+                } else {
                     const updatedCarpets = state.carpets.map((carpet) =>
                         carpet.carpet._id === action.payload ? {...carpet, quantity: carpet.quantity - 1} : carpet
                     );
@@ -97,7 +96,7 @@ export const CartContextProvider: React.FC<CartContextProviderProps> = ({childre
         dispatch({type: "RESET_CART"});
     };
 
-    const contextValue: CartContext = {
+    const contextValue: CartContextType = {
         ...cartState,
         addToCarpets,
         removeFromCarpets,

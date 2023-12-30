@@ -22,24 +22,21 @@ const Body: React.FC = () => {
     const [carpetURL, setCarpetURL] = useState<string>('http://localhost:3001/carpet');
 
     useEffect(() => {
-        const fetchData = async () => {
+        (async () => {
             try {
-                const response = await axios.get(carpetURL);
-                setData(response.data);
+                setData((await axios.get(carpetURL)).data);
             } catch (error) {
                 console.error(error);
             }
-        };
-
-        fetchData();
+        })();
     }, [carpetURL]);
     return (
         <>
             <div style={{maxWidth: '20%', height: '30px'}}>
-                <DropdownCategory setCarpetURL={setCarpetURL} />
+                <DropdownCategory setCarpetURL={setCarpetURL}/>
             </div>
 
-            <Grid container spacing={3}  style={{  paddingTop: '40px' }}>
+            <Grid container spacing={3} style={{paddingTop: '40px'}}>
                 {data.map((card) => (
                     <Grid item key={card._id as React.Key} xs={12} sm={4} md={3}>
                         <NavLink to={'/item/' + card._id} style={{textDecoration: 'none'}}>

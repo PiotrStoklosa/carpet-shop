@@ -28,17 +28,15 @@ const CarpetItemView: React.FC = () => {
     const [carpet, setCarpet] = useState<Carpet>(defaultCarpet);
 
     useEffect(() => {
-        const fetchData = async () => {
+        (async () => {
             try {
                 const response = await axios.get('http://localhost:3001/carpet/' + item);
                 setCarpet(response.data);
             } catch (error) {
                 console.error(error);
             }
-        };
-
-        fetchData();
-    }, []);
+        })();
+    }, [item]);
 
     return (
         <div>

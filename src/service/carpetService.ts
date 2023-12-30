@@ -41,7 +41,7 @@ export async function getCarpetsByMaterial(material: string): Promise<Carpet[]> 
 
 export async function getCarpetById(carpetId: number): Promise<Carpet | null> {
     try {
-        return await Carpet.findOne({ _id: carpetId });
+        return await Carpet.findOne({_id: carpetId});
     } catch (error) {
         console.error(error);
         return null

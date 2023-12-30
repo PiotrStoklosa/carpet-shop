@@ -16,16 +16,15 @@ const DropdownCategory: React.FC<ChildProps> = ({setCarpetURL}) => {
     const [selectedCategory, setSelectedCategory] = useState<string>("");
 
     useEffect(() => {
-        const fetchData = async () => {
+        (async () => {
             try {
                 const response = await axios.get('http://localhost:3001/category');
                 setCategories(response.data);
             } catch (error) {
-                console.error('Error fetching data:', error);
+                console.error(error);
             }
-        };
+        })();
 
-        fetchData();
     }, []);
 
     const handleCategoryChange = (event: SelectChangeEvent) => {

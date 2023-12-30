@@ -20,7 +20,6 @@ function App() {
                 <div style={{background: '#ecf0f1'}}>
                     <div
                         style={{
-                            // color: '#FFFFFF',
                             minHeight: '85vh',
                             maxWidth: '50%',
                             margin: '0 auto',
