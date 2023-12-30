@@ -11,7 +11,8 @@ export interface Carpet {
     color: string,
     material: string,
     image: string,
-    description: string
+    description: string,
+    price: number
 }
 
 
@@ -52,11 +53,11 @@ const Body: React.FC = () => {
                                     alt={`${card.description}`}
                                 />
                                 <CardContent>
-                                    <Typography variant="h5" component="div">
-                                        {card.material}
+                                    <Typography variant="h4" component="div">
+                                        {card.description}
                                     </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-                                        {card.shape}
+                                    <Typography variant="h6" component="div">
+                                        {card.price} PLN
                                     </Typography>
                                 </CardContent>
                             </Card>

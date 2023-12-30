@@ -15,7 +15,8 @@ const defaultCarpet: Carpet = {
     color: "",
     material: "",
     image: "",
-    description: ""
+    description: "",
+    price: 0
 }
 
 const CarpetItemView: React.FC = () => {
@@ -60,6 +61,9 @@ const CarpetItemView: React.FC = () => {
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                         {carpet.shape}
+                    </Typography>
+                    <Typography variant="h6" component="div">
+                        {carpet.price} PLN
                     </Typography>
                     <Typography style={{textAlign: 'right'}}>
                         <IconButton
