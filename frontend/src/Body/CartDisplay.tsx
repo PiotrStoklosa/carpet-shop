@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
 
 import Typography from '@mui/material/Typography';
 import List from '@mui/material/List';
@@ -6,8 +6,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import {CartCarpet, CartContext} from "./Cart";
 import BackArrow from "./BackArrow";
-import axios from "axios";
-import {Carpet} from "./Body";
 import {Button, TextField} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -16,23 +14,9 @@ import {NavLink} from 'react-router-dom';
 const CartDisplay: React.FC = () => {
     const {carpets, removeFromCarpets, resetCart} = useContext(CartContext);
 
-    const [data, setData] = useState<Carpet[]>([]);
     const [shippingAddress, setShippingAddress] = useState('');
     const [email, setEmail] = useState('');
     const [blik, setBlik] = useState('');
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('http://localhost:3001/carpet');
-                setData(response.data as Carpet[]);
-            } catch (error) {
-                console.error(error);
-            }
-        };
-
-        fetchData();
-    }, []);
 
     function handleCart() {
         resetCart();
@@ -41,9 +25,9 @@ const CartDisplay: React.FC = () => {
     const calculateTotalPrice = (): number => {
         let totalPrice = 0;
 
-        carpets.forEach((carpet) => {
-            const {id, quantity} = carpet;
-            const price = data[parseInt(id) - 1].price * quantity || 0;
+        carpets.forEach((c) => {
+            const {carpet, quantity} = c;
+            const price = carpet.price * quantity || 0;
 
             totalPrice += price;
         });
@@ -59,25 +43,25 @@ const CartDisplay: React.FC = () => {
                 Shopping Cart
             </Typography>
 
-            {carpets.length === 0 || data.length === 0 ? (
+            {carpets.length === 0 ? (
                 <Typography>Your cart is empty.</Typography>
             ) : (
                 <List>
                     {carpets.map((carpet: CartCarpet) => (
-                        <ListItem key={carpet.id}>
+                        <ListItem key={carpet.carpet._id}>
                             <ListItemText
-                                primary={`${data[parseInt(carpet.id) - 1].description}, Carpet ID: ${carpet.id}`}
-                                secondary={`Quantity: ${carpet.quantity}, ${carpet.quantity * data[parseInt(carpet.id) - 1].price} PLN`}
+                                primary={`${carpet.carpet.description}, Carpet ID: ${carpet.carpet._id}`}
+                                secondary={`Quantity: ${carpet.quantity}, ${carpet.quantity * carpet.carpet.price} PLN`}
                             />
                             <IconButton
                                 color="primary"
-                                onClick={() => removeFromCarpets(carpet.id)}
+                                onClick={() => removeFromCarpets(carpet.carpet._id)}
                                 style={{color: '#684C38'}}
                             >
                                 <RemoveIcon/>
                             </IconButton><img
-                            src={`${process.env.PUBLIC_URL}/pictures/${data[parseInt(carpet.id) - 1].image}`}
-                            alt={`Carpet ${carpet.id}`}
+                            src={`${process.env.PUBLIC_URL}/pictures/${carpet.carpet.image}`}
+                            alt={`Carpet ${carpet.carpet._id}`}
                             style={{maxWidth: '100px', maxHeight: '100px'}}
                         />
                         </ListItem>
@@ -86,7 +70,7 @@ const CartDisplay: React.FC = () => {
                 </List>
             )
             }
-            {(carpets.length !== 0 && data.length !== 0) && (
+            {carpets.length !== 0 && (
                 <>
                     <p>{calculateTotalPrice()} PLN</p>
                     <TextField

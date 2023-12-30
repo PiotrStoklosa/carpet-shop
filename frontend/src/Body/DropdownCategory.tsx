@@ -29,7 +29,6 @@ const DropdownCategory: React.FC<ChildProps> = ({setCarpetURL}) => {
     }, []);
 
     const handleCategoryChange = (event: SelectChangeEvent) => {
-        console.log(event.target.value);
         setSelectedCategory(event.target.value);
         setCarpetURL('http://localhost:3001/carpet/material/' + event.target.value);
     };

@@ -10,11 +10,11 @@ import IconButton from '@mui/material/IconButton';
 import {Badge, styled} from "@mui/material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {CartContext} from "../Body/Cart";
-import { NavLink, BrowserRouter as Router } from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
 export default function MenuAppBar() {
 
-    const StyledIconButton = styled(IconButton)(({ theme }) => ({
+    const StyledIconButton = styled(IconButton)(({theme}) => ({
         '&.MuiIconButton-root': {
             color: theme.palette.common.black,
             '&:hover': {
@@ -23,30 +23,30 @@ export default function MenuAppBar() {
         },
     }));
 
-    const {amount, carpets, addToCarpets, removeFromCarpets} = useContext(CartContext) || {};
+    const {amount} = useContext(CartContext) || {};
 
     return (
-            <Box sx={{flexGrow: 1}}>
-                <AppBar position="static" style={{background: '#684C38'}}>
-                    <Toolbar>
-                        <Typography variant="h6" component="div">
-                            <NavLink to={'/'} style={{textDecoration: 'none'}}>
+        <Box sx={{flexGrow: 1}}>
+            <AppBar position="static" style={{background: '#684C38'}}>
+                <Toolbar>
+                    <Typography variant="h6" component="div">
+                        <NavLink to={'/'} style={{textDecoration: 'none'}}>
                             <Avatar sx={{width: 60, height: 60}} alt="Logo" src={logo}/>
-                            </NavLink>
-                        </Typography>
-                        <Box sx={{flexGrow: 2}}/>
-                        <NavLink to={'/cart'} style={{textDecoration: 'none'}}>
-                            <StyledIconButton
-                                size="large"
-                                color="inherit"
-                            >
-                                <Badge badgeContent={amount} color="error">
-                                    <ShoppingCartIcon/>
-                                </Badge>
-                            </StyledIconButton>
                         </NavLink>
-                    </Toolbar>
-                </AppBar>
-            </Box>
+                    </Typography>
+                    <Box sx={{flexGrow: 2}}/>
+                    <NavLink to={'/cart'} style={{textDecoration: 'none'}}>
+                        <StyledIconButton
+                            size="large"
+                            color="inherit"
+                        >
+                            <Badge badgeContent={amount} color="error">
+                                <ShoppingCartIcon/>
+                            </Badge>
+                        </StyledIconButton>
+                    </NavLink>
+                </Toolbar>
+            </AppBar>
+        </Box>
     );
 }

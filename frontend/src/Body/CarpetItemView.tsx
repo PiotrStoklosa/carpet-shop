@@ -70,7 +70,7 @@ const CarpetItemView: React.FC = () => {
                             size="large"
                             color="inherit"
                             onClick={() => {
-                                addToCarpets(carpet._id);
+                                addToCarpets(carpet);
                             }}
                         ><ShoppingCartIcon/>
                         </IconButton>

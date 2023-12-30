@@ -24,7 +24,6 @@ const Body: React.FC = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                console.log(carpetURL)
                 const response = await axios.get(carpetURL);
                 setData(response.data);
             } catch (error) {
