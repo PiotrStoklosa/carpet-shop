@@ -23,7 +23,7 @@ const CarpetItemView: React.FC = () => {
 
     const {itemID} = useParams();
     const item: string = itemID!;
-    const {amount, carpets, addToCarpets, removeFromCarpets} = useContext(CartContext);
+    const {addToCarpets} = useContext(CartContext);
     const [carpet, setCarpet] = useState<Carpet>(defaultCarpet);
 
     useEffect(() => {
@@ -52,6 +52,9 @@ const CarpetItemView: React.FC = () => {
                     style={{objectFit: 'contain'}}
                 />
                 <CardContent>
+                    <Typography variant="h4" color="div">
+                        {carpet.description}
+                    </Typography>
                     <Typography variant="h5" component="div">
                         {carpet.material}
                     </Typography>

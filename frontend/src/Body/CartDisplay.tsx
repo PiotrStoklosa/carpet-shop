@@ -8,14 +8,17 @@ import {CartCarpet, CartContext} from "./Cart";
 import BackArrow from "./BackArrow";
 import axios from "axios";
 import {Carpet} from "./Body";
-import {Button} from "@mui/material";
+import {Button, TextField} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import RemoveIcon from '@mui/icons-material/Remove';
+import {NavLink} from 'react-router-dom';
 
 const CartDisplay: React.FC = () => {
-    const {amount, carpets, addToCarpets, removeFromCarpets} = useContext(CartContext);
+    const {amount, carpets, addToCarpets, removeFromCarpets, resetCart} = useContext(CartContext);
 
     const [data, setData] = useState<Carpet[]>([]);
+    const [shippingAddress, setShippingAddress] = useState('');
+    const [email, setEmail] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -29,6 +32,10 @@ const CartDisplay: React.FC = () => {
 
         fetchData();
     }, []);
+
+    function handleCart() {
+        resetCart();
+    }
 
     return (
         <div>
@@ -50,9 +57,9 @@ const CartDisplay: React.FC = () => {
                             <IconButton
                                 color="primary"
                                 onClick={() => removeFromCarpets(carpet.id)}
-                                style={{  color: '#684C38' }}
+                                style={{color: '#684C38'}}
                             >
-                                <RemoveIcon />
+                                <RemoveIcon/>
                             </IconButton><img
                             src={`pictures/1.jpg`}
                             alt={`Carpet ${carpet.id}`}
@@ -64,16 +71,36 @@ const CartDisplay: React.FC = () => {
                 </List>
             )
             }
-            <Button
-                variant="contained"
-                style={{  backgroundColor: '#684C38' }}
+            {carpets.length !== 0 && (
+                <>
+                    <TextField
+                        label="Shipping Address"
+                        variant="outlined"
+                        fullWidth
+                        value={shippingAddress}
+                        onChange={(e) => setShippingAddress(e.target.value)}
+                        style={{margin: '10px 0'}}
+                    />
 
-                onClick={() => {
+                    <TextField
+                        label="Email"
+                        variant="outlined"
+                        fullWidth
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        style={{margin: '10px 0'}}
+                    /> <NavLink to={'/thankyou'} style={{textDecoration: 'none'}}>
+                    <Button
+                        variant="contained"
+                        style={{backgroundColor: '#684C38'}}
+                        onClick={handleCart}
+                    >
+                        KUP
+                    </Button>
+                </NavLink>
+                </>
+            )}
 
-                }}
-            >
-                KUP
-            </Button>
         </div>
     )
         ;
