@@ -9,10 +9,11 @@ import BackArrow from "./BackArrow";
 import {Button, TextField} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import RemoveIcon from '@mui/icons-material/Remove';
+import AddIcon from '@mui/icons-material/Add';
 import {NavLink} from 'react-router-dom';
 
 const CartDisplay: React.FC = () => {
-    const {carpets, removeFromCarpets, resetCart} = useContext(CartContext);
+    const {carpets, removeFromCarpets, addToCarpets, resetCart} = useContext(CartContext);
 
     const [shippingAddress, setShippingAddress] = useState('');
     const [email, setEmail] = useState('');
@@ -59,7 +60,13 @@ const CartDisplay: React.FC = () => {
                                 style={{color: '#684C38'}}
                             >
                                 <RemoveIcon/>
-                            </IconButton><img
+                            </IconButton> <IconButton
+                            color="primary"
+                            onClick={() => addToCarpets(carpet.carpet)}
+                            style={{color: '#684C38'}}
+                        >
+                            <AddIcon/>
+                        </IconButton><img
                             src={`${process.env.PUBLIC_URL}/pictures/${carpet.carpet.image}`}
                             alt={`Carpet ${carpet.carpet._id}`}
                             style={{maxWidth: '100px', maxHeight: '100px'}}

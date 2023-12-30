@@ -13,7 +13,7 @@ interface ChildProps {
 
 const DropdownCategory: React.FC<ChildProps> = ({setCarpetURL}) => {
     const [categories, setCategories] = useState<Category[]>([]);
-    const [selectedCategory, setSelectedCategory] = useState<string>("All");
+    const [selectedCategory, setSelectedCategory] = useState<string>("");
 
     useEffect(() => {
         const fetchData = async () => {

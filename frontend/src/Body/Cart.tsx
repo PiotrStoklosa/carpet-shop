@@ -54,12 +54,20 @@ const cartReducer = (state: CartContext, action: CartAction): CartContext => {
             const removedCarpet = state.carpets.find((carpet) => carpet.carpet._id === action.payload);
 
             if (removedCarpet) {
+                if (removedCarpet.quantity === 1) {
+                    const updatedAmount = state.amount - removedCarpet.quantity;
 
-                const updatedAmount = state.amount - removedCarpet.quantity;
+                    const updatedCarpets = state.carpets.filter((carpet) => carpet.carpet._id !== action.payload);
 
-                const updatedCarpets = state.carpets.filter((carpet) => carpet.carpet._id !== action.payload);
+                    return {...state, amount: updatedAmount, carpets: updatedCarpets};
+                }
+                else{
+                    const updatedCarpets = state.carpets.map((carpet) =>
+                        carpet.carpet._id === action.payload ? {...carpet, quantity: carpet.quantity - 1} : carpet
+                    );
 
-                return {...state, amount: updatedAmount, carpets: updatedCarpets};
+                    return {...state, amount: state.amount - 1, carpets: updatedCarpets};
+                }
             } else {
                 return state;
             }
