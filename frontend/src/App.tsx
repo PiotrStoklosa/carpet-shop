@@ -17,10 +17,10 @@ function App() {
                 <header>
                     <MenuAppBar/>
                 </header>
-                <div style={{background: '#CCBDB2'}}>
+                <div style={{background: '#ecf0f1'}}>
                     <div
                         style={{
-                            color: '#FFFFFF',
+                            // color: '#FFFFFF',
                             minHeight: '85vh',
                             maxWidth: '50%',
                             margin: '0 auto',
@@ -47,7 +47,7 @@ function App() {
                     </div>
                 </div>
             </Router>
-            <footer style={{background: '#684C38', bottom: '0', fontSize: '12px'}}>
+            <footer style={{background: '#3498DB', bottom: '0', fontSize: '12px'}}>
                 <Footer/>
             </footer>
         </CartContextProvider>

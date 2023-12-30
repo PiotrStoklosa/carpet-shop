@@ -27,7 +27,7 @@ export default function MenuAppBar() {
 
     return (
         <Box sx={{flexGrow: 1}}>
-            <AppBar position="static" style={{background: '#684C38'}}>
+            <AppBar position="static" style={{background: '#3498DB'}}>
                 <Toolbar>
                     <Typography variant="h6" component="div">
                         <NavLink to={'/'} style={{textDecoration: 'none'}}>
