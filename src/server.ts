@@ -20,7 +20,13 @@ app.get('/carpet/:id', async (req: Request, res: Response) => {
 
 app.get('/carpet/material/:material', async (req: Request, res: Response) => {
     const carpetMaterial = req.params.material;
-    res.send(await getCarpetsByMaterial(carpetMaterial));
+    if (carpetMaterial === "all"){
+        res.send(await getAllCarpets());
+    }
+    else{
+        res.send(await getCarpetsByMaterial(carpetMaterial));
+    }
+
 });
 
 app.get('/carpet', async (_req: Request, res: Response) => {

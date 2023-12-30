@@ -14,7 +14,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import {NavLink} from 'react-router-dom';
 
 const CartDisplay: React.FC = () => {
-    const {amount, carpets, removeFromCarpets, resetCart} = useContext(CartContext);
+    const {carpets, removeFromCarpets, resetCart} = useContext(CartContext);
 
     const [data, setData] = useState<Carpet[]>([]);
     const [shippingAddress, setShippingAddress] = useState('');
@@ -42,7 +42,7 @@ const CartDisplay: React.FC = () => {
         let totalPrice = 0;
 
         carpets.forEach((carpet) => {
-            const { id, quantity } = carpet;
+            const {id, quantity} = carpet;
             const price = data[parseInt(id) - 1].price * quantity || 0;
 
             totalPrice += price;
@@ -50,8 +50,6 @@ const CartDisplay: React.FC = () => {
 
         return totalPrice;
     };
-
-    console.log(data)
 
     return (
 
@@ -68,8 +66,8 @@ const CartDisplay: React.FC = () => {
                     {carpets.map((carpet: CartCarpet) => (
                         <ListItem key={carpet.id}>
                             <ListItemText
-                                primary={`${data[parseInt(carpet.id)-1].description}, Carpet ID: ${carpet.id}`}
-                                secondary={`Quantity: ${carpet.quantity}, ${carpet.quantity * data[parseInt(carpet.id)-1].price} PLN`}
+                                primary={`${data[parseInt(carpet.id) - 1].description}, Carpet ID: ${carpet.id}`}
+                                secondary={`Quantity: ${carpet.quantity}, ${carpet.quantity * data[parseInt(carpet.id) - 1].price} PLN`}
                             />
                             <IconButton
                                 color="primary"
@@ -78,7 +76,7 @@ const CartDisplay: React.FC = () => {
                             >
                                 <RemoveIcon/>
                             </IconButton><img
-                            src={`${process.env.PUBLIC_URL}/pictures/${data[parseInt(carpet.id)-1].image}`}
+                            src={`${process.env.PUBLIC_URL}/pictures/${data[parseInt(carpet.id) - 1].image}`}
                             alt={`Carpet ${carpet.id}`}
                             style={{maxWidth: '100px', maxHeight: '100px'}}
                         />
@@ -117,14 +115,14 @@ const CartDisplay: React.FC = () => {
                         style={{margin: '10px 0'}}
                     />
                     <NavLink to={'/thankyou'} style={{textDecoration: 'none'}}>
-                    <Button
-                        variant="contained"
-                        style={{backgroundColor: '#684C38'}}
-                        onClick={handleCart}
-                    >
-                        KUP
-                    </Button>
-                </NavLink>
+                        <Button
+                            variant="contained"
+                            style={{backgroundColor: '#684C38'}}
+                            onClick={handleCart}
+                        >
+                            KUP
+                        </Button>
+                    </NavLink>
                 </>
             )}
 
